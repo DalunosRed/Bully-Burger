@@ -28,7 +28,7 @@
 					</ul>
 				</li>
 
-<li><a href="reg-users"><i class="fa fa-users"></i> Reg Users</a></li>
+<li><a href="reg-users"><i class="fa fa-users"></i> REG EMPLOYEES</a></li>
 
 
 

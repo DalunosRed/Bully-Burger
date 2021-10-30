@@ -4,7 +4,7 @@
 		<ul class="ts-profile-nav">
 
 			<li class="ts-account">
-				<a href="#"><img src="img/ts-avatar.png" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
+				<a href="#"><img src="img/ts-avatar.png" class="ts-avatar " alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
 				<ul>
 					<li><a href="change-password">Change Password</a></li>
 					<li><a href="logout">Logout</a></li>

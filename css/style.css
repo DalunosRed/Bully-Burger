@@ -4,7 +4,7 @@
 *   FOR RESPONSIVENESS      *
 ****************************/
 ::selection {
-  background: #4f5362;
+  background: #071750;
   /* WebKit/Blink Browsers */
   color: #fff;
 }
@@ -642,7 +642,7 @@ li {
 .ts-sidebar {
   background: #2c3630fd;
   max-height: 0;
-  transition: max-height 0.3s;
+  transition: max-height 0.2s;
   overflow: hidden;
   position: fixed;
   z-index: 2;
@@ -738,10 +738,4 @@ li {
   .ts-main-content .content-wrapper {
     margin-left: 250px;
   }
-}
-/* Login page */
-.login-page {
-  position: absolute;
-  height: 100%;
-  width: 100%;
 }

@@ -39,7 +39,7 @@ if (isset($_SESSION['adminid'])) {
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS</title>
+    <title>Bully Burger</title>
     <!--
     <link rel = "icon" href = "https://media.geeksforgeeks.org/wp-content/cdn-uploads/gfg_200X200.png" type = "image/x-icon">
 -->
@@ -56,7 +56,7 @@ if (isset($_SESSION['adminid'])) {
 
       <div class="float">
         <div class="float-left-green">
-          <img src="images/Logo.png" alt="Logo" height="300px">
+          <img src="images/Logo.png" alt="Logo" height="350px">
           <div class="float-text">
             <p>THE MEATIEAST AND CHEESIEST BURGER FOR YOUR CRAVINGS!</p>
           </div>

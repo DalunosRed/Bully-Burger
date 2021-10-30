@@ -45,6 +45,9 @@ justify-content: space-between;
   align-items: center;
   flex-direction: column;
 }
+.float-left-green img{
+  height: 300px;
+}
 .float-text{
   width: 60%;
   text-align: center;
