@@ -101,6 +101,7 @@ $(document).ready(function() {
 // ================================================
 // LOGIN AJAX
 $('.form').on('submit', '#loginAjax', function(e) {
+  console.log("fw")
   e.preventDefault();
 
   $.ajax({
@@ -136,7 +137,6 @@ $('.form').on('submit', '#loginAjax', function(e) {
       console.log("error" + xhr.responseText + xhr.status);
     });
 });
-
 
 // ================================================
 // ADMIN AJAX
@@ -178,6 +178,87 @@ $('.form').on('submit', '#adminAjax', function(e) {
       console.log("error" + xhr.responseText + xhr.status);
     });
 });
+
+
+
+// =============================================== SCROLL EFFECT VANILLA JS
+var coll = document.getElementsByClassName("tran");
+var i;
+
+for (i = 0; i < coll.length; i++) {
+coll[i].addEventListener("click", function() {
+this.classList.toggle("active");
+var content = this.nextElementSibling;
+if (content.style.maxHeight){
+content.style.maxHeight = null;
+} else {
+content.style.maxHeight = content.scrollHeight + "px";
+}
+});
+}
+ScrollReveal({
+    container: document.getElementById("tran"),
+});
+
+// Section 1
+
+ScrollReveal().reveal(".form", {
+    delay: 0,
+    duration: 1000,
+    distance: '20%',
+    origin: 'bottom',
+    opacity: 0,
+    viewOffset: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    },
+});
+
+ScrollReveal().reveal(".button_cont", {
+    delay: 220,
+    duration: 1000,
+    distance: '20%',
+    origin: 'bottom',
+    opacity: 0,
+    viewOffset: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    },
+});
+
+
+ScrollReveal().reveal(".float-left-green", {
+    delay: 220,
+    duration: 1000,
+    distance: '20%',
+    origin: 'bottom',
+    opacity: 0,
+    viewOffset: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    },
+});
+
+ScrollReveal().reveal(".box-choice", {
+    delay: 220,
+    duration: 1000,
+    distance: '20%',
+    origin: 'bottom',
+    opacity: 0,
+    viewOffset: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+    },
+});
+// ================================================
 
 
 });//end ready
