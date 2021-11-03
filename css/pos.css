@@ -1,0 +1,33 @@
+/* navbar bgcolor */
+.navbar{
+  background-color: #317C64;
+      color: #fff;
+
+}
+.navbar-default .navbar-text{
+  color:#fff;
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 5px;
+  margin-top: 25px;
+}
+
+/* burger menu */
+.glyphicon{
+  font-size: 30px;
+  margin-top: 15px;
+}
+/* logo icon */
+.navbar-brand{
+  padding: 10px 10px 20px 10px;
+}
+
+/* dropdown text color */
+.navbar-default .navbar-nav>li>a{
+  color:#fff;
+  padding-top:30px;
+}
+/* drodown ohover */
+.navbar .nav>li>a:hover{
+  background-color: #246b55;
+}
