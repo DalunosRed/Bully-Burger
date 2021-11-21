@@ -6,58 +6,27 @@ if (!isset($_SESSION['adminid'])) {
   header("Location: /Bully-Burger");
 }
 
-	?>
-<!doctype html>
-<html lang="en" class="no-js">
+?>
+<!DOCTYPE html>
+<html lang="en">
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
-
-	<title>Bully Burger Panel | Admin Dashboard</title>
-
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Sandstone Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap Datatables -->
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<!-- Bootstrap social button library -->
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<!-- Bootstrap select -->
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<!-- Bootstrap file input -->
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<!-- Awesome Bootstrap checkbox -->
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<!-- Admin Stye -->
-	<link rel="stylesheet" href="./css/style.css">
-</head>
+<?php  include_once 'php/includes/meta-tags.include.php' ?>
 
 <body>
-<?php include('php/includes/header.php');?>
 
-	<div class="ts-main-content">
-<?php include('php/includes/leftbar.php');?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
+    <!-- SIDEBAR -->
+<?php  include_once 'php/includes/sidebar.include.php' ?>
 
-				<div class="row">
-					<div class="col-md-12">
 
-						<h2 class="page-title">Dashboard</h2>
+    <div class="main-content">
+        <!-- HEADER -->
+    <?php  include_once 'php/includes/header1.include.php' ?>
+    DASHBOARD
+    <?php  include_once 'php/includes/header2.include.php' ?>
 
-						<div class="row">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-primary text-light">
-												<div class="stat-panel text-center">
+        <main>
+            <div class="cards">
+
 <?php
 $sql ="SELECT employee_id from users ";
 $query = $dbh -> prepare($sql);
@@ -65,196 +34,55 @@ $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
 $regusers=$query->rowCount();
 ?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($regusers);?></div>
-													<div class="stat-panel-title text-uppercase">Reg Employees</div>
-												</div>
-											</div>
-											<a href="reg-users.php" class="block-anchor panel-footer">Full Detail <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-success text-light">
-												<div class="stat-panel text-center">
-												<?php
-$sql1 ="SELECT id from category ";
-$query1 = $dbh -> prepare($sql1);;
-$query1->execute();
-$results1=$query1->fetchAll(PDO::FETCH_OBJ);
-$category=$query1->rowCount();
-?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($category);?></div>
-													<div class="stat-panel-title text-uppercase">Quantity of Categories</div>
-												</div>
-											</div>
-											<a href="manage-category.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-info text-light">
-												<div class="stat-panel text-center">
-												
-<?php
-$sql2 ="SELECT id from tblbooking ";
-$query2= $dbh -> prepare($sql2);
-$query2->execute();
-$results2=$query2->fetchAll(PDO::FETCH_OBJ);
-$bookings=$query2->rowCount();
-?>
+                <div class="card-single" id="v-employees">
+                    <div>
+                        <h1><?php echo htmlentities($regusers);?></h1>
+                        <span>TOTAL EMPLOYEE</span>
+                    </div>
+                    <div>
+                        <span class="bx bx-user-pin"></span>
+                    </div>
+                </div>
+                <div class="card-single" id="v-category">
+                    <div>
+                        <h1>CATEGORY</h1>
+                        <span>LIST OF CATEGORIES</span>
+                    </div>
+                    <div>
+                        <span class="bx bx-category"></span>
+                    </div>
+                </div>
 
-													<div class="stat-panel-number h1 "><?php echo htmlentities($bookings);?></div>
-													<div class="stat-panel-title text-uppercase">For Delivery</div>
-												</div>
-											</div>
-											<a href="manage-bookings.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-warning text-light">
-												<div class="stat-panel text-center">
+                <div class="card-single" id="v-items">
+                    <div>
+                        <h1>ITEMS</h1>
+                        <span>LIST OF ITEMS</span>
+                    </div>
+                    <div>
+                        <span class="bx bx-food-menu"></span>
+                    </div>
+                </div>
 
-<?php
-$sql3 ="SELECT Product_id from itemlist ";
-$query3= $dbh -> prepare($sql3);
-$query3->execute();
-$results3=$query3->fetchAll(PDO::FETCH_OBJ);
-$itemlist=$query3->rowCount();
-?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($itemlist);?></div>
-													<div class="stat-panel-title text-uppercase">Quantity of items</div>
-												</div>
-											</div>
-											<a href="manage-item" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+                <div class="card-single" id="v-inventory">
+                    <div>
+                        <h1>MAIN INVENTORY</h1>
+                        <span>LINK TO MAIN INVENTORY</span>
+                    </div>
+                    <div>
+                        <span class="bx bx-list-ol"></span>
+                    </div>
+                </div>
 
 
+            </div>
+            <!--Tabla-->
 
-<div class="row">
-					<div class="col-md-12">
+        </main>
 
-
-						<div class="row">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-primary text-light">
-												<div class="stat-panel text-center">
-<!--													
-<?php
-$sql4 ="SELECT id from tblsubscribers ";
-$query4 = $dbh -> prepare($sql4);
-$query4->execute();
-$results4=$query4->fetchAll(PDO::FETCH_OBJ);
-$subscribers=$query4->rowCount();
-?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($subscribers);?></div>
-													<div class="stat-panel-title text-uppercase">Subscibers</div>
-												</div>
-											</div>
-											<a href="manage-subscribers.php" class="block-anchor panel-footer">Full Detail <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-success text-light">
-												<div class="stat-panel text-center">
--->
-<!--
-<?php
-$sql6 ="SELECT id from tblcontactusquery ";
-$query6 = $dbh -> prepare($sql6);;
-$query6->execute();
-$results6=$query6->fetchAll(PDO::FETCH_OBJ);
-$query=$query6->rowCount();
-?>
-													<div class="stat-panel-number h1 "><?php echo htmlentities($query);?></div>
-													<div class="stat-panel-title text-uppercase">Queries</div>
-												</div>
-											</div>
-											<a href="manage-conactusquery.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-									<div class="col-md-3">
-										<div class="panel panel-default">
-											<div class="panel-body bk-info text-light">
-												<div class="stat-panel text-center">
--->						
-<?php
-$sql5 ="SELECT id from tbltestimonial ";
-$query5= $dbh -> prepare($sql5);
-$query5->execute();
-$results5=$query5->fetchAll(PDO::FETCH_OBJ);
-$testimonials=$query5->rowCount();
-?>
-
-													<div class="stat-panel-number h1 "><?php echo htmlentities($testimonials);?></div>
-													<div class="stat-panel-title text-uppercase">Comments/Suggestions</div>
-												</div>
-											</div>
-											<a href="testimonials.php" class="block-anchor panel-footer text-center">Full Detail &nbsp; <i class="fa fa-arrow-right"></i></a>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+    </div>
+    <?php  include_once 'php/includes/admin-modal.include.php' ?>
 
 
-
-
-
-
-
-
-
-			</div>
-		</div>
-	</div>
-
-	<!-- Loading Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
-
-	<script>
-
-	window.onload = function(){
-
-		// Line chart from swirlData for dashReport
-		var ctx = document.getElementById("dashReport").getContext("2d");
-		window.myLine = new Chart(ctx).Line(swirlData, {
-			responsive: true,
-			scaleShowVerticalLines: false,
-			scaleBeginAtZero : true,
-			multiTooltipTemplate: "<%if (label){%><%=label%>: <%}%><%= value %>",
-		});
-
-		// Pie Chart from doughutData
-		var doctx = document.getElementById("chart-area3").getContext("2d");
-		window.myDoughnut = new Chart(doctx).Pie(doughnutData, {responsive : true});
-
-		// Dougnut Chart from doughnutData
-		var doctx = document.getElementById("chart-area4").getContext("2d");
-		window.myDoughnut = new Chart(doctx).Doughnut(doughnutData, {responsive : true});
-
-	}
-	</script>
 </body>
+
 </html>

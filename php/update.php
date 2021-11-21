@@ -2,12 +2,14 @@
 require_once 'includes/config.php';
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+session_start();
 
 $fname = $_POST["fname"];
 $lname = $_POST["lname"];
 $usn = $_POST["usn"];
 $pwd = $_POST["pwd"];
 $repwd = $_POST["repwd"];
+$employee_id = $_SESSION['employee_id'];
 
 if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd)){
     $error = ['emptyfields' => 'Please fill in all the fields'];
@@ -34,33 +36,23 @@ if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd
            echo json_encode($error);
            exit();
       }else{
-
-        $sql = "SELECT username FROM users WHERE username=?"; //checks if uid is taken
-        $stmt = $dbh->prepare($sql);
-
-        $stmt->execute([$usn]);
-        $rowCount = $stmt->rowCount(); //get row count
-
-        if ($rowCount > 0) {
-            $error = ['usernametaken' => 'Username already taken'];
-            echo json_encode($error);
-            exit();
-        } else {
-            $sql = "INSERT INTO users (first_name,last_name,username,password) VALUES (?,?,?,?)";
+            $sql = "UPDATE users
+            SET
+              first_name=?,
+              last_name =?,
+              username =?,
+              password=?
+            WHERE
+              employee_id = ?";
             $stmt = $dbh->prepare($sql);
 
             // hash password
             $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
-            $stmt->execute([$fname,$lname,$usn,$hashedPassword]);
-
-            $sql = "SELECT * FROM users WHERE username=?";  //immediately transfer to another page with session started
-            $stmt = $dbh->prepare($sql);
-            $stmt->execute([$usn]);
+            $stmt->execute([$fname,$lname,$usn,$hashedPassword, $employee_id]);
             $error = ['success' => 'success'];
             echo json_encode($error);
             exit();
-    }
-    exit();
+
   }
 
 }

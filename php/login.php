@@ -1,31 +1,23 @@
 <?php
-require_once 'config/config.php';
+require_once 'includes/config.php';
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
+$usn = $_POST['usn'];
+$pwd = $_POST['pwd'];
 
-  $usn = $_POST['usn'];
-  $pwd = $_POST['pwd'];
-
-  if (empty($usn) || empty($pwd)) {
+if (empty($usn) || empty($pwd)) {
     $error =['emptyfields'=>'Please fill in all the fields'];
     echo json_encode($error);
     exit();
-  } else {
+  } else{
     $sql = "SELECT * FROM users WHERE username=?";
-    $stmt= mysqli_stmt_init($dbh);
+    $stmt = $dbh->prepare($sql);
 
-      if (!mysqli_stmt_prepare($stmt, $sql)) {
-        exit();
-      } else {
-        mysqli_stmt_bind_param($stmt, "s", $usn);
-        mysqli_stmt_execute($stmt);
+    $stmt->execute([$usn]);
 
-        $result = mysqli_stmt_get_result($stmt);
-          if ($row = mysqli_fetch_assoc($result)) {
-              if ($pwd != $row['password']) {
-                $error = ['passwordnotmatch' => 'Password do not match'];
-                echo json_encode($error);
-                exit();
-              } elseif ($pwd == $row['password']) {
+        if ($row = $stmt->fetch()) {
+            $pwdCheck = password_verify($pwd, $row['password']);
+            if ($pwdCheck) {
                 session_start();
                 $_SESSION['id']= $row['employee_id'];
                 $_SESSION['usn']= $row['username'];
@@ -33,18 +25,17 @@ require_once 'config/config.php';
                 $_SESSION['lname']= $row['last_name'];
 
                 $error = ['success' => 'success'];
-                  echo json_encode($error);
+                echo json_encode($error);
+                  exit();
+            } else{
+                $error = ['passwordnotmatch' => 'Password do not match'];
+                echo json_encode($error);
                 exit();
-              }
-
-          } else {
+            }
+          } else{
             $error = ['nouser' => 'No user match detected'];
-              echo json_encode($error);
-            exit();
+            echo json_encode($error);
+             exit();
           }
-      }
-  }
-  mysqli_stmt_close($stmt);   //closes everything to save resource
-  mysqli_close($dbh);
 
- ?>
+}

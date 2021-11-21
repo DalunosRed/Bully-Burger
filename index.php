@@ -46,7 +46,6 @@ if (isset($_SESSION['adminid'])) {
 
           <div class="box-choice">
             <h3 id="login">LOGIN</h3>
-            <h3 id="register">REGISTER</h3>
           </div>
 
           <!-- Form -->
@@ -97,5 +96,5 @@ if (isset($_SESSION['adminid'])) {
   </div>
 
 
-  </body>
+</body>
 </html>

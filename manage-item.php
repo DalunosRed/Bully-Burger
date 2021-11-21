@@ -7,96 +7,37 @@ if (!isset($_SESSION['adminid'])) {
   }
 else{
 
-if(isset($_REQUEST['del']))
-	{
-$delid=intval($_GET['del']);
-$sql = "delete from itemlist  WHERE  Product_id=:delid";
-$query = $dbh->prepare($sql);
-$query -> bindParam(':delid',$delid, PDO::PARAM_STR);
-$query -> execute();
-$msg="Item is deleted successfully";
-}
-
-
  ?>
 
 <!doctype html>
 <html lang="en" class="no-js">
 
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
-	<meta name="description" content="">
-	<meta name="author" content="">
-	<meta name="theme-color" content="#3e454c">
-	
-	<title>Bully Burger Panel |Admin Manage Items   </title>
-
-	<!-- Font awesome -->
-	<link rel="stylesheet" href="css/font-awesome.min.css">
-	<!-- Sandstone Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<!-- Bootstrap Datatables -->
-	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
-	<!-- Bootstrap social button library -->
-	<link rel="stylesheet" href="css/bootstrap-social.css">
-	<!-- Bootstrap select -->
-	<link rel="stylesheet" href="css/bootstrap-select.css">
-	<!-- Bootstrap file input -->
-	<link rel="stylesheet" href="css/fileinput.min.css">
-	<!-- Awesome Bootstrap checkbox -->
-	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
-	<!-- Admin Stye -->
-	<link rel="stylesheet" href="css/style.css">
-  <style>
-		.errorWrap {
-    padding: 10px;
-    margin: 0 0 20px 0;
-    background: #fff;
-    border-left: 4px solid #dd3d36;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-.succWrap{
-    padding: 10px;
-    margin: 0 0 20px 0;
-    background: #fff;
-    border-left: 4px solid #5cb85c;
-    -webkit-box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-    box-shadow: 0 1px 1px 0 rgba(0,0,0,.1);
-}
-		</style>
-
-</head>
+<?php  include_once 'php/includes/meta-tags.include.php' ?>
 
 <body>
-	<?php include('php/includes/header.php');?>
 
-	<div class="ts-main-content">
-		<?php include('php/includes/leftbar.php');?>
-		<div class="content-wrapper">
-			<div class="container-fluid">
+<!-- SIDEBAR -->
+<?php  include_once 'php/includes/sidebar.include.php' ?>
 
-				<div class="row">
-					<div class="col-md-12">
+    <div class="main-content">
+        <!-- HEADER -->
+    <?php  include_once 'php/includes/header1.include.php' ?>
+    ITEM
+    <?php  include_once 'php/includes/header2.include.php' ?>
 
-						<h2 class="page-title">Manage Items</h2>
+        <main>
+		<table class="table">
+			<br>
+			<button class="btn btn-primary"><a href = "item-add" class="text-light">Add Item</a></button>
 
-						<!-- Zero Configuration Table -->
-						<div class="panel panel-default">
-							<div class="panel-heading">Item Details</div>
-							<div class="panel-body">
-							<?php if($error){?><div class="errorWrap"><strong>ERROR</strong>:<?php echo htmlentities($error); ?> </div><?php } 
-				else if($msg){?><div class="succWrap"><strong>SUCCESS</strong>:<?php echo htmlentities($msg); ?> </div><?php }?>
-								<table id="zctb" class="display table table-striped table-bordered table-hover" cellspacing="0" width="100%">
-									<thead>
+		<thead>
 										<tr>
 										<th>#</th>
 											<th>Product Name</th> 		<!--Product Name-->
 											<th>Price</th>		<!--Price-->
 											<th>Quantity</th>
-											<th>Exp.Date</th>			
+											<th>Exp.Date</th>
+											<th>Category</th>
 											<th>Action</th>
 										</tr>
 									</thead>
@@ -106,60 +47,62 @@ $msg="Item is deleted successfully";
 											<th>Product Name</th> 		<!--Product Name-->
 											<th>Price</th>		<!--Price-->
 											<th>Quantity</th>
-											<th>Exp.Date</th>			
+											<th>Exp.Date</th>
+											<th>Category</th>
 											<th>Action</th>
 										</tr>
 									</tfoot>
 									<tbody>
 
-<?php $sql = "SELECT * from itemlist";
+<?php
+$sql  = 'SELECT
+					p.categ as category_name,
+					i.Product_id,
+					i.category_id,
+					i.ProductName,
+					i.Price,
+					i.Qty,
+					i.ExpDate
+					FROM itemlist i
+					LEFT JOIN
+					 category p ON i.category_id = p.id
+					';
 $query = $dbh -> prepare($sql);
 $query->execute();
 $results=$query->fetchAll(PDO::FETCH_OBJ);
+
 $cnt=1;
 if($query->rowCount() > 0)
 {
 foreach($results as $result)
-{			
-?>	
+{
+?>
 										<tr>
+
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($result->ProductName);?></td>
-											<td><?php echo htmlentities($result->Price);?></td>
+											<td>₱<?php echo htmlentities($result->Price);?></td>
 											<td><?php echo htmlentities($result->Qty);?></td>
 											<td><?php echo htmlentities($result->ExpDate);?></td>
-		<td><a href="additem.php?id=<?php echo $result->Product_id;?>"><i class="fa fa-edit"></i></a>&nbsp;&nbsp;
-<a href="manage-item.php?del=<?php echo $result->Product_id;?>" onclick="return confirm('Do you want to delete');"><i class="fa fa-close"></i></a></td>
+											<td><?php echo htmlentities($result->category_name);?></td>
+                                            <td>
+      <button class="btn btn-primary">
+				<a href = "item-edit?itemid=<?php echo htmlentities($result->Product_id); ?>" class="text-light">
+					EDIT</a></button>
+                                            </td>
+
 										</tr>
 										<?php $cnt=$cnt+1; }} ?>
-										
+
 									</tbody>
 								</table>
+        </main>
 
-						
-
-							</div>
-						</div>
-
-					
-
-					</div>
-				</div>
-
-			</div>
-		</div>
 	</div>
 
-	<!-- Loading Scripts -->
-	<script src="js/jquery.min.js"></script>
-	<script src="js/bootstrap-select.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-	<script src="js/jquery.dataTables.min.js"></script>
-	<script src="js/dataTables.bootstrap.min.js"></script>
-	<script src="js/Chart.min.js"></script>
-	<script src="js/fileinput.js"></script>
-	<script src="js/chartData.js"></script>
-	<script src="js/main.js"></script>
+	<?php  include_once 'php/includes/admin-modal.include.php' ?>
+
+
 </body>
 </html>
 <?php } ?>
