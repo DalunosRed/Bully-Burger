@@ -15,7 +15,7 @@ if(isset($_GET['id'])){
     echo '  window.location.replace("/Bully-Burger/reg-users") }';
     echo '</script>';
 }else{
-        die($stmt);
+  header("Location: /Bully-Burger/reg-users"); /* Redirect browser */
     }
 
 

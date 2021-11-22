@@ -10,4 +10,6 @@ $stmt->execute([$_SESSION['adminid']]);
 $result = $stmt->fetch();
 
 $error = ['status' => $result];
-echo json_encode($error);
+echo json_encode($result);
+
+

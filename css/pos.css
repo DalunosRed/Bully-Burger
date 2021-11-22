@@ -77,6 +77,11 @@
 .btn-choices img{
     width: 40px;
 }
+.btn-choices-add{
+  background:#157347;
+  border-color: #198754;
+  color:#fff;
+}
 /* others button */
 .others{
   flex-direction: row;
@@ -178,9 +183,9 @@
   border-top: 1px solid #a1a1a1;
 }
 .v-price button{
+  width: 100%;
   background: #317C64;
   font-weight: 600;
-  font-size: 30px;
   color: #fff;
 }
 

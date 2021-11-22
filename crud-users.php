@@ -23,7 +23,7 @@ if (!isset($_SESSION['adminid'])) {
     <main>
 <!-- ====== -->
         <div class="containter-fluid col-md-12">
-        <button type="button" class="btn btn-info" onclick="goBack()">Go Back</button>
+        <button type="button" class="btn btn-info btn-noA" onclick="goBack()">Go Back</button>
         <br>
         <br>
         <script>
@@ -59,7 +59,7 @@ if (!isset($_SESSION['adminid'])) {
             </div>
             <div class="v-pos">
               <h4 id="error"></h4>
-              <input type="submit" class="btn btn-success" name="submit"></input>
+              <input type="submit" class="btn btn-success btn-noA" name="submit"></input>
             </div>
 
           </form>

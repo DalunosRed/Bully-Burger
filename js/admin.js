@@ -1,25 +1,4 @@
 $(document).ready(function() {
-  // Check if admin pass is already changed
-  $.ajax({
-    url: 'php/admin-password-status.php',
-    type: 'POST',
-    dataType: 'JSON'
-  })
-  .done(function(data) {
-    console.log(data)
-  $.map(data, function(val, index) {
-    console.log(index)
-    if (!val) {  //0=false  equivalent to nottrue
-      $("#change-pass").html("Your password is still on default, please change it")
-    } else {
-      $("#change-pass").html("")
-    }
-  });
-})
-  .fail(function(xhr) {
-    console.log("error" + xhr.responseText + xhr.status);
-  });
-
 
 // changing admin pass from modal
 $('.form').on('submit', '#adminChangepass', function(e) {
@@ -162,6 +141,9 @@ $('.form').on('submit', '#itemUpdate', function(e) {
   .done(function(data) {
     $.map(data, function(val, index) {
         switch (index) {
+          case 'prodnametaken':
+            $('#error').text(val);
+            break;
           case 'success':
             window.location.replace('manage-item');
             //prints error if there is
@@ -204,6 +186,9 @@ $('.form').on('submit', '#itemAdd', function(e) {
   .done(function(data) {
     $.map(data, function(val, index) {
         switch (index) {
+          case 'prodnametaken':
+            $('#error').text(val);
+            break;
           case 'success':
             window.location.replace('manage-item');
             //prints error if there is
@@ -212,11 +197,75 @@ $('.form').on('submit', '#itemAdd', function(e) {
         }
   });
 })
+
+});
+
+
+
+// =====================categorty update ============/
+$('.form').on('submit', '#categoryUpdate', function(e) {
+  e.preventDefault();
+  console.log("gwe");
+  $.ajax({
+    url: 'php/category-update.php',
+    type: 'POST',
+    dataType: 'JSON',
+    data: {
+      categ: $('#categU').val()
+  }
+  })
+  .done(function(data) {
+    $.map(data, function(val, index) {
+      console.log(data);
+        switch (index) {
+          case 'categnametaken':
+            $('#error').text(val);
+            break;
+          case 'success':
+            window.location.replace('manage-category');
+            //prints error if there is
+            console.log(val);
+            break;
+        }
+  });
+  })
   .fail(function(xhr, status, error) {
         console.log("error "  + error+xhr.responseText + xhr.status);
       });
 });
 
+
+/// ==============Category Add==============
+$('.form').on('submit', '#categAdd', function(e) {
+  e.preventDefault();
+  console.log("d")
+
+  $.ajax({
+    url: 'php/categorylist-add.php',
+    type: 'POST',
+    dataType: 'JSON',
+    data: {
+      categ: $("#categA").val()
+    }
+  })
+  .done(function(data) {
+    $.map(data, function(val, index) {
+        switch (index) {
+          case 'categnametaken':
+            $('#error').text(val);
+            break;
+          case 'success':
+            window.location.replace('manage-category');
+            //prints error if there is
+            console.log(val);
+            break;
+        }
+  });
+})
+.fail(function(xhr, status, error) {
+  console.log("error "  + error+xhr.responseText + xhr.status);
+});
+});
 
 
 

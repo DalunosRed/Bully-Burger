@@ -71,85 +71,25 @@ if (!isset($_SESSION['id'])) {
           </div>
 
           <div class="scrollable-cards">
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-              <span class="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-success text-light">
-                  5
-                </span>
-              <span class="position-absolute top-10 start-100 translate-middle badge rounded-pill v-badge">
-                  &times;
-                </span>
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-            <button type="button" class="btn btn-light btn-cards">
-              <img src="images/the-burger.png" alt="Burger-icon">
-              Burger
-            </button>
-
+      <!-- JS -->
           </div>
         </div>
 
         <div class="choices">
-          <button type="button" class="btn btn-outline-success btn-choices">
-            <img src="images/the-burger.png" alt="Burger-icon">
-            Burger
-          </button>
-          <button type="button" class="btn btn-outline-success btn-choices">
-            <img src="images/the-bread.png" alt="Burger-icon">
-            Bread
-          </button>
-          <button type="button" class="btn btn-outline-success btn-choices">
-            <img src="images/the-drinks.png" alt="Burger-icon">
-            Drinks
-          </button>
-          <button type="button" class="btn btn-outline-success others btn-choices">
-            <img src="images/the-food.png" alt="Burger-icon">
-            Others
-          </button>
+<?php
+require_once 'php/includes/config.php';
+$dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+
+$sql = 'SELECT * from category ORDER BY id DESC';
+$stmt = $dbh->prepare($sql);
+$stmt->execute();
+$row = $stmt->fetchAll();
+
+foreach($row as $res){  
+?>  
+
+<button type="button" class="btn btn-outline-success btn-choices btn-choice-click"><?php echo htmlentities($res['categ']);  ?></button>
+<?php } ?>
         </div>
 
         <div class="v-align-right">
@@ -184,9 +124,9 @@ if (!isset($_SESSION['id'])) {
             </div>
           </div>
         <!-- content -->
-        <div class="container-fluid no-pad v-height">
+        <div class="container-fluid no-pad v-height items-js">
           <!-- ============== -->
-          <div class="row no-pad checkout-flex">
+          <!-- <div class="row no-pad checkout-flex">
               <div class="col-6 no-pad">
                 <div class="input-group flex-wrap ">
                   <span class="input-group-text no-bgcolor-border pad-marg text-wrap text-break " id="addon-wrapping ">
@@ -207,31 +147,9 @@ if (!isset($_SESSION['id'])) {
                 <div class="col-3 no-pad">
                   P500.00
                 </div>
-            </div>
+            </div> -->
           <!-- ============== -->
-          <div class="row no-pad checkout-flex">
-              <div class="col-6 no-pad">
-                <div class="input-group flex-wrap ">
-                  <span class="input-group-text no-bgcolor-border pad-marg text-wrap text-break " id="addon-wrapping ">
-                    <img src="images/trash-icon.png" alt="trashicon" width="24px">
-                    Fries
-                   </span>
-                </div>
-              </div>
-                <div class="col-3 no-pad">
-                  <div class="input-group flex-wrap">
-                    <span class="input-group-text no-bgcolor-border pad-marg" id="addon-wrapping">
-                      <i class="bi bi-plus-circle-fill"></i>
-                        1
-                      <i class="bi bi-dash-circle-fill"></i>
-                     </span>
-                  </div>
-                </div>
-                <div class="col-3 no-pad">
-                  P500.00
-                </div>
 
-            </div>
           </div> <!--container-->
 
 

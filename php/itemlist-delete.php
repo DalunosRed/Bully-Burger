@@ -10,12 +10,13 @@ if(isset($_GET['itemid'])){
   echo '<script type="text/javascript">';
   echo 'let res = confirm("Are you sure you want to delete all of these products?");';
   echo 'if ( res == true) { ';
-    echo '  window.location.replace("itemlist-delete-ok") ';
+    echo '  window.location.replace("itemlist-delete-ok?itemid='.$itemid.'")';
     echo ' } else { ';
     echo '  window.location.replace("/Bully-Burger/item-edit?itemid='.$itemid.'") }';
     echo '</script>';
 }else{
-        die($stmt);
+  header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
+
     }
 
 

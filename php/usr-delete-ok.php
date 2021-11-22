@@ -2,6 +2,7 @@
 require_once 'includes/config.php';
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+if(isset($_GET['id'])){
 session_start();
 $employee_id = $_SESSION['employee_id'];
 
@@ -11,3 +12,8 @@ $employee_id = $_SESSION['employee_id'];
     echo '<script type="text/javascript">';
     echo '  window.location.replace("/Bully-Burger/reg-users")';
     echo '</script>';
+}else{
+    header("Location: /Bully-Burger/reg-users"); /* Redirect browser */
+
+  
+      }

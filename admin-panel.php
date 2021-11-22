@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 include('php/includes/config.php');
 if (!isset($_SESSION['adminid'])) {
   header("Location: /Bully-Burger");
@@ -13,7 +12,7 @@ if (!isset($_SESSION['adminid'])) {
 <?php  include_once 'php/includes/meta-tags.include.php' ?>
 
 <body>
-
+<script src="js/admin-status.js"></script>
     <!-- SIDEBAR -->
 <?php  include_once 'php/includes/sidebar.include.php' ?>
 

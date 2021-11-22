@@ -8,20 +8,37 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $expdate =$_POST['expdate'];
   $categ =$_POST['category_id'];
 
-  $sql = "SELECT id FROM category WHERE categ=?";
-  $stmt = $dbh->prepare($sql);
-  $stmt->execute([$categ]);
-  $row = $stmt->fetch();
-  $category_id= $row['id'];
+  if (isset($prod)) {
 
+    $sql = "SELECT id FROM category WHERE categ=?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([$categ]);
+    $row = $stmt->fetch();
+    $category_id= $row['id'];
+
+    $sql = "SELECT ProductName FROM itemlist WHERE ProductName=?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([$prod]);
+    $rowCount= $stmt->rowCount();
+    if ($rowCount > 0) {
+        $error = ['prodnametaken' => 'This product is already existing'];
+        echo json_encode($error);
+        exit();
+    } else {
       $query = "INSERT INTO itemlist(category_id,ProductName, Price, Qty, ExpDate) VALUES (?,?,?,?,?)";
       $stmt = $dbh->prepare($query);
 
       $stmt->execute([$category_id,$prod,$price,$qty,$expdate]);
 
-      $error = ['success' => $expdate];
+      $error = ['success' => 'success'];
       echo json_encode($error);
       exit();
+    }
+    # code...
+  }else{
+  header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
+    
+  }
 
 
  ?>

@@ -8,6 +8,9 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $expdate =$_POST['expdate'];
   $categ =$_POST['category_id'];
 
+  if (isset($prod)) {
+    # code...
+ 
   session_start();
   $itemid = $_SESSION['itemid'];
 
@@ -18,6 +21,15 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $category_id= $row['id'];
 
 
+    $sql = "SELECT ProductName FROM itemlist WHERE ProductName=?";
+    $stmt = $dbh->prepare($sql);
+    $stmt->execute([$prod]);
+    $rowCount= $stmt->rowCount();
+    if ($rowCount > 0) {
+        $error = ['prodnametaken' => 'This product is already existing'];
+        echo json_encode($error);
+        exit();
+    } else {
       $query = "UPDATE itemlist
        SET
         ProductName = ?,
@@ -33,6 +45,9 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
       $error = ['success' => $expdate];
       echo json_encode($error);
       exit();
+  }
+}else{
+  header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
 
-
+}
  ?>

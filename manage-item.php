@@ -1,6 +1,5 @@
 <?php
 session_start();
-error_reporting(0);
 include('php/includes/config.php');
 if (!isset($_SESSION['adminid'])) {
 	header("Location: /Bully-Burger");

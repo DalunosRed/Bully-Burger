@@ -27,7 +27,7 @@ $_SESSION['employee_id'] = $employee_id;
     <main>
       <!-- ====== -->
               <div class="containter-fluid col-md-12">
-              <button type="button" class="btn btn-info" onclick="goBack()">Go Back</button>
+              <button type="button" class="btn btn-info btn-noA" onclick="goBack()">Go Back</button>
               <br>
               <br>
               <script>
@@ -68,7 +68,7 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
                   </div>
                   <div class="v-pos">
                     <h4 id="error"></h4>
-                    <input type="submit" class="btn btn-success" value="Update"></input>
+                    <input type="submit" class="btn btn-success btn-noA" value="Update"></input>
                   </div>
 
                 </form>

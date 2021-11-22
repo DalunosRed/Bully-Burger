@@ -2,6 +2,8 @@
 require_once 'includes/config.php';
 
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+if(isset($_GET['itemid'])){
+
 session_start();
 $itemid = $_SESSION['itemid'];
 
@@ -11,3 +13,7 @@ $itemid = $_SESSION['itemid'];
     echo '<script type="text/javascript">';
     echo '  window.location.replace("/Bully-Burger/manage-item")';
     echo '</script>';
+}else  {
+    header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
+
+}
