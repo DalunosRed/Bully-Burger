@@ -83,12 +83,12 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 $sql = 'SELECT * from category ORDER BY id DESC';
 $stmt = $dbh->prepare($sql);
 $stmt->execute();
-$row = $stmt->fetchAll();
+$row = $stmt->fetchAll(PDO::FETCH_OBJ);
 
-foreach($row as $res){  
-?>  
+foreach($row as $res){
+?>
 
-<button type="button" class="btn btn-outline-success btn-choices btn-choice-click"><?php echo htmlentities($res['categ']);  ?></button>
+<button type="button" class="btn btn-outline-success btn-choices btn-choice-click"><?php echo htmlentities($res->categ);  ?></button>
 <?php } ?>
         </div>
 
@@ -126,39 +126,16 @@ foreach($row as $res){
         <!-- content -->
         <div class="container-fluid no-pad v-height items-js">
           <!-- ============== -->
-          <!-- <div class="row no-pad checkout-flex">
-              <div class="col-6 no-pad">
-                <div class="input-group flex-wrap ">
-                  <span class="input-group-text no-bgcolor-border pad-marg text-wrap text-break " id="addon-wrapping ">
-                    <img src="images/trash-icon.png" alt="trashicon" width="24px">
-                    Burger Whopper
-                   </span>
-                </div>
-              </div>
-                <div class="col-3 no-pad">
-                  <div class="input-group flex-wrap">
-                    <span class="input-group-text no-bgcolor-border pad-marg" id="addon-wrapping">
-                      <i class="bi bi-plus-circle-fill"></i>
-                        1
-                      <i class="bi bi-dash-circle-fill"></i>
-                     </span>
-                  </div>
-                </div>
-                <div class="col-3 no-pad">
-                  P500.00
-                </div>
-            </div> -->
-          <!-- ============== -->
-
           </div> <!--container-->
 
 
           <div class="col-12 v-price">
             <div class="checkout-price">
               <h6><span>Subtotal:</span></h6>
-              <h3>P567.00</h3>
+              <h3 id="subtotal">&#8369; 0.00</h3>
             </div>
-            <button type="button" class="btn btn-success">CHECK OUT</button>
+            <button type="button" id="checkout-btn" class="btn btn-success">CHECK OUT</button>
+            <h4 id="error"></h4>
           </div>
         </div> <!--col4-->
 

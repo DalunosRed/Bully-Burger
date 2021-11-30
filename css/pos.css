@@ -7,7 +7,15 @@
 .navbar-dark .navbar-nav .nav-link{
   color:rgba(255,255,255,1)
 }
-
+/* ERROR */
+#error, #modal-error{
+ /* height: 0px; */
+ color: red;
+ font-size: 16px;
+ text-align: center;
+ margin: 0;
+ padding: 10px;
+}
 /* ============================================ */
 /* body content */
 .padding-20{
@@ -107,6 +115,9 @@
 .no-pad{
   padding: 0;
 }
+.Price{
+  padding-left:20px;
+}
 .no-margin{
   margin: 0;
 }
@@ -120,10 +131,11 @@
   padding: 7px 0;
 }
 .v-height{
-  /* background: red; */
-  /* border: 1px solid red; */
-  max-height: 65%;
+  max-height: 60%;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-left: 10px;
 }
 /* header */
 
@@ -131,6 +143,9 @@
   -webkit-box-shadow: 2px 2px 5px 0px rgba(84,84,84,1);
   -moz-box-shadow: 2px 2px 5px 0px rgba(84,84,84,1);
   box-shadow: 2px 2px 5px 0px rgba(84,84,84,1);
+  overflow: hidden;
+  max-height: 80vh;
+
 }
 .checkout h3{
   text-align: center;
@@ -178,6 +193,7 @@
 }
 .v-price{
   display: flex;
+  flex-wrap: wrap;
   flex-direction: column;
   flex-grow: 1;
   border-top: 1px solid #a1a1a1;
