@@ -1,11 +1,10 @@
 $(document).ready(function () {
-  let initialCategory,thisclicked, ctr=0 ,ctr2=0;
+  let initialCategory,thisclicked;
   let arr=[];
   let arrtemp=[];
-  let arrNum=[];
+
   let total = 0;
-  let prevTarget = null;
-let numOccurences, numQty;
+let numOccurences;
 let prodname, price, qty=0;
 
   $(".choices button:first-child").addClass( "btn-choices-add");
@@ -28,7 +27,8 @@ let prodname, price, qty=0;
       // removing error text
       $('#error').text('')
 
-      thisclicked =$(this).text();
+      thisclicked =$(this).find('h4').text();
+      console.log(thisclicked);
       getIndivItem();
 
     });
@@ -78,7 +78,6 @@ let prodname, price, qty=0;
     });
 
 
-
     // Check out button
     $('#checkout-btn').click(function(event) {
       if (arr.length == 0) {
@@ -90,20 +89,78 @@ let prodname, price, qty=0;
           dataType: 'JSON',
           data: {
             arr : JSON.stringify(arr)
-          }
+          },
+        beforeSend: function() {
+            $("#loading_wrap").show();
+            $(".loading_div").show();
+         },
+        complete: function() {
+            setTimeout(function() {
+              $("#loading_wrap").hide();
+              $(".loading_div").hide();
+          }, 500);
+        }
         })
         .done(function(data) {
-          console.log("success");
+          $.map(data, function(val, index) {
+              switch (index) {
+                case 'shortstock':
+                  $('#error').text(val);
+                  break;
+                case 'success':
+                  setTimeout(function() {
+                    $('.modal').css({
+                      "visibility" : "visible",
+                      "opacity" : "1"
+                    });
+                    $('#error').text('');
+
+                }, 700);
+                  break;
+                }
+              });
         })
         .fail(function(xhr) {
-          console.log('error' + xhr.responseText + xhr.status);
+          console.log('error' + xhr.responseText );
         });
       }
+});
+
+  // Close Modal
+  $('.modal__close').click(function(event) {
+    closeModal();
+  });
+
+  //new order
+  $('#newOrder').click(function(event) {
+   arr = [] //reset array
+   arrtemp = []
+   $('.items-js').html('')
+   console.log(arr, arrtemp);
+  });
 
 
-    });
+// PRINT
+  $('#Print').click(function(event) {
+    sessionStorage.setItem('arr', JSON.stringify(arr));  //send array
+    window.location.replace('php/pos/receipt');
+
+  });
+
+// CANCEL PRINT
+  $('#Cancel').click(function(event) {
+    closeModal();
+  });
 // ==============================
      // FUNCTIONS
+    function closeModal(){
+      $('.modal').css({
+        "visibility" : "hidden",
+        "opacity" : "0"
+      });
+      $('.scrollable-cards').html('')
+      getitems(); //reset item for updating stocks
+     }
     function itemAppend(ProductName, Price, QTY){
       $('.items-js').append(
         '<div class="row no-pad checkout-flex chh">'+
@@ -201,9 +258,18 @@ let prodname, price, qty=0;
      })
      .done(function(data) {
        $.map(data, function(val, index) {
-         $('.scrollable-cards').append
-           ('<button type="button" class="btn btn-light btn-cards">'+val.ProductName+'</button>'
-           );
+         console.log("0");
+
+         if (val.Qty <= 0) {
+           $('.scrollable-cards').append
+             ('<button type="button" class="btn btn-light btn-cards" disabled><p>'+ val.Qty+'</p>'+val.ProductName+ '<p>Out of Stock</p>'+'</button>');
+
+         } else{
+           $('.scrollable-cards').append
+             ('<button type="button" class="btn btn-light btn-cards"><p>'+val.Qty+'</p>'+
+             '<h4>'+val.ProductName+'</h4></button>');
+         }
+
        });
      })
      .fail(function(xhr) {

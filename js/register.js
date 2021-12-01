@@ -14,6 +14,7 @@ $(document).ready(function() {
         fname: $("#fnameR").val(),
         lname: $("#lnameR").val(),
         usn: $("#usnR").val(),
+        email: $("#emailR").val(),
         pwd: $("#pwdR").val(),
         repwd: $("#repwdR").val()
       }

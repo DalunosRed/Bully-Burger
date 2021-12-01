@@ -49,6 +49,10 @@ if (!isset($_SESSION['adminid'])) {
               <input type="text" id="usnR" class="form-control" placeholder="Username" name="username" required autocomplete="new-username">
               </div>
               <div class="form-group">
+              <label>Email</label>
+              <input type="email" id="emailR" class="form-control" placeholder="Email" name="email" required autocomplete="new-email">
+              </div>
+              <div class="form-group">
               <label>Password</label>
               <input type="password"  id="pwdR" class="form-control" placeholder="Password" name="password" required autocomplete="new-password">
               </div>

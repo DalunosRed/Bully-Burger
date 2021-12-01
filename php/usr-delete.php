@@ -10,7 +10,7 @@ if(isset($_GET['id'])){
   echo '<script type="text/javascript">';
   echo 'let res = confirm("Are you sure you want to delete?");';
   echo 'if ( res == true) { ';
-    echo '  window.location.replace("usr-delete-ok") ';
+    echo '  window.location.replace("usr-delete-ok?id='.$employee_id.'") ';
     echo ' } else { ';
     echo '  window.location.replace("/Bully-Burger/reg-users") }';
     echo '</script>';

@@ -39,7 +39,8 @@ else{
                                             <th>Employee Id</th>
 											<th>First Name</th>
 											<th>Last Name </th>
-											<th>username</th>
+											<th>Username</th>
+											<th>Email</th>
 
                                         <th>Action</th>
 										</tr>
@@ -52,7 +53,8 @@ else{
                                             <th>Employee Id</th>
 											<th>First Name</th>
 											<th>Last Name </th>
-											<th>username</th>
+											<th>Username</th>
+											<th>Email</th>
 
                                         <th>Action</th>
 										</tr>
@@ -76,6 +78,7 @@ foreach($results as $result)
 											<td><?php echo htmlentities($result->first_name);?></td>
 											<td><?php echo htmlentities($result->last_name);?></td>
 											<td><?php echo htmlentities($result->username);?></td>
+											<td><?php echo htmlentities($result->email);?></td>
 
                                             <td>
 

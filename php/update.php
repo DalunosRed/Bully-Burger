@@ -7,13 +7,14 @@ session_start();
 $fname = $_POST["fname"];
 $lname = $_POST["lname"];
 $usn = $_POST["usn"];
+$email = $_POST["email"];
 $pwd = $_POST["pwd"];
 $repwd = $_POST["repwd"];
 $employee_id = $_SESSION['employee_id'];
 if (isset($fname)) {
- 
 
-  if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd)){
+
+  if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd) || empty($email)){
       $error = ['emptyfields' => 'Please fill in all the fields'];
       echo json_encode($error);
       exit();
@@ -42,6 +43,7 @@ if (isset($fname)) {
               SET
                 first_name=?,
                 last_name =?,
+                email = ?,
                 username =?,
                 password=?
               WHERE
@@ -50,7 +52,7 @@ if (isset($fname)) {
 
               // hash password
               $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
-              $stmt->execute([$fname,$lname,$usn,$hashedPassword, $employee_id]);
+              $stmt->execute([$fname,$lname,$email,$usn,$hashedPassword, $employee_id]);
               $error = ['success' => 'success'];
               echo json_encode($error);
               exit();

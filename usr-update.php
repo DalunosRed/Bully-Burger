@@ -58,6 +58,10 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
                     <input type="text" id="usnUp" value="<?php echo htmlspecialchars($row['username']); ?>" class="form-control" placeholder="Username" name="username" required autocomplete="new-username">
                     </div>
                     <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="emailUp" value="<?php echo htmlspecialchars($row['email']); ?>" class="form-control" placeholder="Email" name="email" required autocomplete="new-email">
+                    </div>
+                    <div class="form-group">
                     <label>Password</label>
                     <input type="password"  id="pwdUp" class="form-control" placeholder="Password" name="password" required autocomplete="new-password">
                     </div>

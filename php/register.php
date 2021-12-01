@@ -8,10 +8,11 @@ $lname = $_POST["lname"];
 $usn = $_POST["usn"];
 $pwd = $_POST["pwd"];
 $repwd = $_POST["repwd"];
+$email = $_POST["email"];
 
 if (isset($fname)) {
 
-  if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd)){
+  if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd) || empty($email)){
       $error = ['emptyfields' => 'Please fill in all the fields'];
       echo json_encode($error);
       exit();
@@ -48,12 +49,12 @@ if (isset($fname)) {
               echo json_encode($error);
               exit();
           } else {
-              $sql = "INSERT INTO users (first_name,last_name,username,password) VALUES (?,?,?,?)";
+              $sql = "INSERT INTO users (first_name,last_name,email, username,password) VALUES (?,?,?,?,?)";
               $stmt = $dbh->prepare($sql);
 
               // hash password
               $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
-              $stmt->execute([$fname,$lname,$usn,$hashedPassword]);
+              $stmt->execute([$fname,$lname, $email,$usn,$hashedPassword]);
 
               $sql = "SELECT * FROM users WHERE username=?";  //immediately transfer to another page with session started
               $stmt = $dbh->prepare($sql);

@@ -75,6 +75,7 @@ $('.form').on('submit', '#updateAJAX', function(e) {
       fname: $("#fnameUp").val(),
       lname: $("#lnameUp").val(),
       usn: $("#usnUp").val(),
+      email: $("#emailUp").val(),
       pwd: $("#pwdUp").val(),
       repwd: $("#repwdUp").val()
     }

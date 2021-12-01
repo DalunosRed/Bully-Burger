@@ -94,12 +94,8 @@ foreach($row as $res){
 
         <div class="v-align-right">
           <div class="order-buttons" align="right">
-            <a type="button" class="btn btn-success btn-choices order" href="#modal">
-              HOLD ORDER</a>
-            </button>
-            <a type="button" class="btn btn-danger btn-choices order" href="#modal">
-              CANCEL ORDER</a>
-            </button>
+            <a type="button" id="newOrder" class="btn btn-danger btn-choices order">
+              RESET ORDER</a>
           </div>
         </div>
 
@@ -145,11 +141,22 @@ foreach($row as $res){
 
 
 
+<!-- LOAIND SPINNER -->
+<div class="loading_div">
+  <div id='loading_wrap'>
+   <img src="images/Rolling-1s-200px.gif" alt="lodaing" width="50px">
+   </div>
+</div>
+
+
 
      <!-- MODAL  should be treated as a separate section-->
-     <div id="modal" class="modal">
+     <div class="modal">
          <div class="modal__content">
-              <p>GWEGEW</p>
+           <i class="bi bi-check2-circle" style="font-size:60px; color:green;"></i>
+           <h3>Done</h3>
+           <a class="btn btn-outline-info" id="Print">Print</a>
+           <button type="button"  class="btn btn-outline-danger" id="Cancel">Back</button>
              <a href="#" class="modal__close">&times;</a>
          </div>
      </div>
