@@ -49,7 +49,6 @@ if (!isset($_SESSION['id'])) {
                 Account
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Change Passsword</a></li>
                 <li><a class="dropdown-item" href="logout">Logout</a></li>
               </ul>
             </li>
@@ -63,12 +62,6 @@ if (!isset($_SESSION['id'])) {
       <div class="col-8">
 
         <div class="content">
-          <div class="search-top">
-            <form class="d-flex">
-              <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-              <button class="btn btn-outline-success" type="submit"><i class="bi bi-search"></i></button></button>
-            </form>
-          </div>
 
           <div class="scrollable-cards">
       <!-- JS -->

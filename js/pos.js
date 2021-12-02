@@ -28,7 +28,7 @@ let prodname, price, qty=0;
       $('#error').text('')
 
       thisclicked =$(this).find('h4').text();
-      console.log(thisclicked);
+      // console.log(thisclicked);
       getIndivItem();
 
     });
@@ -62,21 +62,56 @@ let prodname, price, qty=0;
       let checkoutClicked = $(this).parents('.chh').find('.ProductName').text();
 
       for (var i = 0; i < arr.length; i++) {
-        if (arr[i].Name == checkoutClicked) {
-          arr[i].Quantity-=1;
+          if (arr[i].Name == checkoutClicked) {
+            arr[i].Quantity-=1;
 
-          if (arr[i].Quantity == 0) {
-            // remove from main arr and temp arr
-            arr.splice(i,1)
-            arrtemp.splice(i,1)
+            if (arr[i].Quantity == 0) {
+              // remove from main arr and temp arr
+              arr.splice(i,1)
+              arrtemp.splice(i,1)
+
+              if (arr.length <=0) {
+                $('.items-js').html('')
+                $('#subtotal').html("&#8369;" + total.toFixed(2))
+                break; //break from loop
+              }
+            }
           }
-        }
-        itemAppend(arr[i].Name,arr[i].Price, arr[i].Quantity);
+      }
+      for (var j = 0; j < arr.length; j++) {
+        itemAppend(arr[j].Name,arr[j].Price, arr[j].Quantity);
       }
       //get total
       getTotal()
     });
 
+
+    // Trash Button
+    $('.items-js').on('click', '#trash', function(event) {
+      event.preventDefault();
+      total = 0
+      $('.items-js').html('')
+      let checkoutClicked = $(this).parents('.chh').find('.ProductName').text();
+
+      for (var i = 0; i < arr.length; i++) {
+          if (arr[i].Name == checkoutClicked) {
+            arr.splice(i,1)
+            arrtemp.splice(i,1)
+          }
+
+          if (arr.length <=0) {
+            $('.items-js').html('')
+            $('#subtotal').html("&#8369;" + total.toFixed(2))
+            break; //break from loop
+          }
+        }
+
+        for (var j = 0; j < arr.length; j++) {
+          itemAppend(arr[j].Name,arr[j].Price, arr[j].Quantity);
+        }
+        //get total
+        getTotal()
+    });
 
     // Check out button
     $('#checkout-btn').click(function(event) {
@@ -258,7 +293,6 @@ let prodname, price, qty=0;
      })
      .done(function(data) {
        $.map(data, function(val, index) {
-         console.log("0");
 
          if (val.Qty <= 0) {
            $('.scrollable-cards').append
