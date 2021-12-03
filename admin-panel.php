@@ -93,26 +93,13 @@ $regusers=$query->rowCount();
                         <span class="bx bx-food-menu"></span>
                     </div>
                 </div>
-
-                <div class="card-single" id="v-inventory">
-                    <div>
-                        <h1>MAIN INVENTORY</h1>
-                        <span>LINK TO MAIN INVENTORY</span>
-                    </div>
-                    <div>
-                        <span class="bx bx-list-ol"></span>
-                    </div>
-                </div>
-
-
             </div>
-            <!--Tabla-->
+            <!--Table-->
 
         </main>
 
     </div>
     <?php  include_once 'php/includes/admin-modal.include.php' ?>
-
 
 </body>
 
