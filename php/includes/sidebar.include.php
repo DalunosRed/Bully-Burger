@@ -37,9 +37,6 @@
                 </li>
                 <div class="profile_details">
 
-                    <div class="name1">
-                        <div class="name">ADMIN</div>
-                    </div>
                 </div>
 
             </div>

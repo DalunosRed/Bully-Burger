@@ -166,7 +166,6 @@ $('.form').on('submit', '#itemAdd', function(e) {
   let m =  date.getMonth();
   m += 1;  // JavaScript months are 0-11
   let y = date.getFullYear();
-  console.log(d)
   let formattedDate = y + "-" + m + "-" + d;
 
 

@@ -1,7 +1,7 @@
 
             </h2>
+            <p id="change-pass" style="color:red; margin:20px;"></p>
 
-            <p id="change-pass" style="color:red"></p>
             <div class="user-wrapper">
                 <div>
                     <h4>Admin</h4>

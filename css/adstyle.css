@@ -11,6 +11,13 @@
 .las {
     cursor: pointer;
 }
+.text-flex{
+  display: flex;
+  flex-direction: row;
+}
+.text-flex p{
+  padding:0 15px;
+}
 /* Modal */
 .modal {
  visibility: hidden;
@@ -88,7 +95,7 @@
 }
 .btn-noA{
   padding: 8px 12px;
-  
+
 }
 .btn a {
   display: block;
@@ -333,8 +340,15 @@ main {
 }
 
 
-
+@media only screen and (max-width: 1200px){
+  #change-pass{
+     width: 35%; font-size: 11px;
+  }
+}
 @media only screen and (max-width: 1024px) {
+  #change-pass{
+     width: 30%; font-size: 12px;
+  }
   .v-pos input, .v-pos button{
     margin-top: 10px;
     width: 45%;
@@ -376,7 +390,10 @@ main {
 
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 975px) {
+  #change-pass{
+     width: 40%; font-size: 11px;
+  }
     .search-wrapper {
         display: none;
     }
@@ -451,6 +468,9 @@ main {
 }
 
 @media only screen and (max-width: 560px) {
+  #change-pass{
+     width: 30%; font-size: 8px;
+  }
 
 }
 
@@ -503,4 +523,5 @@ main {
 }
 .table{
     margin: auto;
+
 }

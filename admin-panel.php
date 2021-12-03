@@ -24,6 +24,38 @@ if (!isset($_SESSION['adminid'])) {
     <?php  include_once 'php/includes/header2.include.php' ?>
 
         <main>
+<?php
+date_default_timezone_set('Asia/Manila');
+$dateToday = date("F j, Y");
+$dateQuery = date('Y-m-d');
+$sql ="SELECT * from sales WHERE date = ?";
+$query = $dbh -> prepare($sql);
+$query->execute([$dateQuery]);
+$results=$query->fetchAll(PDO::FETCH_OBJ);
+
+$totalSales = 0;
+$totalSold = 0;
+foreach ($results as $res) {
+  $totalSales+= $res->sales;
+  $totalSold += $res->totalSoldItems;
+}
+
+?>
+
+          <div class="card border-success mb-3" style="max-width: 100%;">
+            <div class="card-header bg-transparent border-success"> <h4>Total Sales as of <?php echo $dateToday;?></h4> </div>
+            <div class="card-body text-success ">
+              <div class="text-flex">
+                <h5 class="card-title">Total Sales: </h5>
+                <p class="card-text">&#8369;<?php echo number_format($totalSales, 2); ?></p>
+              </div>
+              <div class="text-flex">
+                <h5 class="card-title">Total Number of Sold Items: </h5>
+                <p class="card-text"><?php echo $totalSold; ?></p>
+              </div>
+            </div>
+          </div>
+
             <div class="cards">
 
 <?php

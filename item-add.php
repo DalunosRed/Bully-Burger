@@ -44,11 +44,11 @@ if (!isset($_SESSION['adminid'])) {
               </div>
               <div class="form-group">
               <label>Price</label>
-              <input type="text" id="priceA"  class="form-control" placeholder="Price" required >
+              <input type="number" id="priceA"  class="form-control" placeholder="Price" required >
               </div>
               <div class="form-group">
               <label>Quantity</label>
-              <input type="text" id="qtyA" class="form-control" placeholder="Quantity" required >
+              <input type="number" id="qtyA" class="form-control" placeholder="Quantity" required >
               </div>
 
               <div class="form-group">

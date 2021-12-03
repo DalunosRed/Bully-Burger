@@ -64,11 +64,11 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
                     </div>
                     <div class="form-group">
                     <label>Price</label>
-                    <input type="text" id="priceI" value="<?php echo htmlspecialchars($row['Price']); ?>" class="form-control" placeholder="Price" required >
+                    <input type="number" id="priceI" value="<?php echo htmlspecialchars($row['Price']); ?>" class="form-control" placeholder="Price" required >
                     </div>
                     <div class="form-group">
                     <label>Quantity</label>
-                    <input type="text" id="qtyI" value="<?php echo htmlspecialchars($row['Qty']); ?>" class="form-control" placeholder="Quantity" required >
+                    <input type="number" id="qtyI" value="<?php echo htmlspecialchars($row['Qty']); ?>" class="form-control" placeholder="Quantity" required >
                     </div>
                     <div class="form-group">
                       <label>Expiration Date</label>
