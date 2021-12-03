@@ -267,6 +267,4 @@ $('.form').on('submit', '#categAdd', function(e) {
 });
 });
 
-
-
 });//end ready

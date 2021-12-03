@@ -9,16 +9,16 @@ if (!isset($_SESSION['adminid'])) {
 
 <!DOCTYPE html>
 <html lang="en">
-<?php  include_once 'php/includes/meta-tags.include.php' ?>
+<?php  include_once 'php/includes/meta-tags2.include.php' ?>
 
 <body>
 
   <!-- SIDEBAR -->
-<?php  include_once 'php/includes/sidebar.include.php' ?>
+<?php  include_once 'php/includes/sidebar2.include.php' ?>
 
     <div class="main-content">
       <!-- HEADER -->
-  <?php  include_once 'php/includes/header1.include.php' ?>
+      <?php  include_once 'php/includes/header-int.include.php' ?>
   ADDING ITEM
   <?php  include_once 'php/includes/header2.include.php' ?>
 
