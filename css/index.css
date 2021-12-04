@@ -131,11 +131,14 @@ justify-content: space-between;
 
 /* Admin Button */
 .button_cont{
+  display: flex;
   position: absolute;
-  bottom: 20px;
-  right: 10px;
+  width: 62.5%;
+  justify-content: space-between;
+  bottom: 10px;
 }
-.example_f {
+
+.example_f, .example_a {
    border-radius: 4px;
    border: none;
    /* background:  !important; */
@@ -149,12 +152,31 @@ justify-content: space-between;
    cursor: pointer;
    font-weight: 900;
  }
- .example_f span {
+ .example_f span, .example_a span {
    cursor: pointer;
    display: inline-block;
    position: relative;
    transition: 0.4s;
  }
+
+
+ .example_a span:after {
+   content: '\00ab';
+   position: absolute;
+   opacity: 0;
+   top: 0;
+   left: -20px;
+   transition: 0.5s;
+ }
+ .example_a:hover span {
+   padding-left: 25px;
+ }
+ .example_a:hover span:after {
+   opacity: 1;
+   left: 0;
+ }
+
+
  .example_f span:after {
    content: '\00bb';
    position: absolute;
@@ -211,7 +233,7 @@ justify-content: space-between;
   text-decoration: none;
 }
 /* ERROR */
-#error, #modal-error{
+#error, .modal-error{
   /* height: 0px; */
   color: red;
   font-size: 16px;

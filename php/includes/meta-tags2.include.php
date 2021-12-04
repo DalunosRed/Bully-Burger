@@ -8,8 +8,8 @@
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/inventory.css">  <!--Style for admin-panel.php-->
-    
-    <script src="js/admin.js"></script>
+
+    <script src="js/inventory.js"></script>
     <script src="js/register.js"></script>
 
 </head>

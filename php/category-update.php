@@ -3,11 +3,9 @@ require_once 'includes/config.php';
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
   $categ =$_POST['categ'];
-
+    session_start();
 
   if (isset($categ)) {
-
-    session_start();
     $categoryid = $_SESSION['categoryid'];
 
       $sql = "SELECT categ FROM category WHERE categ=?";
@@ -30,8 +28,12 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }  # code...
 }
 else{
-  header("Location: /Bully-Burger/manage-category"); /* Redirect browser */
+  if (isset($_SESSION['inventoryid'])) {
+    header("Location: /Bully-Burger/inventory-category"); /* Redirect browser */
 
+  }else{
+    header("Location: /Bully-Burger/manage-category"); /* Redirect browser */
+  }
 }
 
  ?>

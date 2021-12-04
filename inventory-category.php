@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('php/includes/config.php');
-if (!isset($_SESSION['adminid'])) {
+if (!isset($_SESSION['inventoryid'])) {
   header("Location: /Bully-Burger");
 }
 
@@ -12,7 +12,7 @@ if (!isset($_SESSION['adminid'])) {
 <?php  include_once 'php/includes/meta-tags2.include.php' ?>
 
 <body>
-<script src="js/admin-status.js"></script>
+<script src="js/inventory-status.js"></script>
     <!-- SIDEBAR -->
 <?php  include_once 'php/includes/sidebar2.include.php' ?>
 
@@ -48,7 +48,7 @@ if (!isset($_SESSION['adminid'])) {
                             </tfoot>
 <tbody>
 
-<?php 
+<?php
 //category table
 $sql = "SELECT * from  category";
 $query = $dbh -> prepare($sql);
@@ -62,7 +62,7 @@ foreach($results as $result)
 {
 ?>
                                 <tr>
-              <?php 
+              <?php
                 //number of items
                 $sql2 = "SELECT * from itemlist WHERE category_id=?";
                 $query2 = $dbh -> prepare($sql2);
@@ -74,7 +74,7 @@ foreach($results as $result)
                                     <td><?php echo htmlentities($result->upddate);?></td>
                                     <td><?php echo htmlentities($rowCount);?></td>
 <td>
-<button class="btn btn-primary">
+<button class="btn btn-secondary">
 <a href = "inventory-category-edit?categoryid=<?php echo htmlentities($result->id); ?>"
   class="text-light">EDIT</a></button>
                                     </td>
@@ -82,20 +82,20 @@ foreach($results as $result)
                                 <?php $cnt=$cnt+1; }} ?>
 
                             </tbody>
-                            
+
 </table>
 <br>
-  <button class="btn btn-primary"><a href = "inventory-category-add"
+  <button class="btn btn-secondary"><a href = "inventory-category-add"
     class="text-light">Add Category</a></button>
 </main>
-                
+
             </div>
             <!--Tabla-->
 
         </main>
 
     </div>
-    <?php  include_once 'php/includes/admin-modal.include.php' ?>
+    <?php  include_once 'php/includes/inventory-modal.include.php' ?>
 
 
 </body>

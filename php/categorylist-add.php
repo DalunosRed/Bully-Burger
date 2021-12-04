@@ -3,7 +3,7 @@ require_once 'includes/config.php';
 $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
   $categ =$_POST['categ'];
-
+  session_start();
 
 if (isset($categ)) {
 
@@ -27,8 +27,13 @@ if (isset($categ)) {
   }
   # code...
 }else{
-  header("Location: /Bully-Burger/manage-category"); /* Redirect browser */
-  
+  if (isset($_SESSION['inventoryid'])) {
+    header("Location: /Bully-Burger/inventory-category"); /* Redirect browser */
+
+  }else{
+    header("Location: /Bully-Burger/manage-category"); /* Redirect browser */
+  }
+
 }
 
 

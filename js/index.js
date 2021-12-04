@@ -83,6 +83,49 @@ $('.form').on('submit', '#adminAjax', function(e) {
 });
 
 
+// ================================================
+// INVENTROY AJAX
+$('.form').on('submit', '#inventoryAjax', function(e) {
+  e.preventDefault();
+
+  $.ajax({
+      url: 'php/inventory.php',
+      method: 'POST',
+      dataType: 'JSON',
+      data: {
+        usn: $("#usnIn").val(),
+        pwd: $("#pwdIn").val()
+      },
+    })
+    .done(function(data) {
+      console.log(data);
+      $.map(data, function(val, index) {
+        switch (index) {
+          case 'emptyfields':
+            $('.modal-error').text(val);
+            break;
+          case 'passwordnotmatch':
+            $('.modal-error').text(val);
+            break;
+          case 'nouser':
+            $('.modal-error').text(val);
+            break;
+          case 'connerror':
+            $('.modal-error').text(val);
+            break;
+          case 'success':
+            window.location.replace('inventory-category');
+            console.log(data);
+            break;
+        }
+      });
+    })
+    .fail(function(xhr) {
+      console.log("error" + xhr.responseText + xhr.status);
+    });
+});
+
+
 
 // =============================================== SCROLL EFFECT VANILLA JS
 var coll = document.getElementsByClassName("tran");

@@ -8,6 +8,9 @@
     --text-grey: #8390A2;
 }
 /*  */
+.table td, .table th{
+  padding: 4px;
+}
 .las {
     cursor: pointer;
 }
@@ -159,7 +162,7 @@
     transition: 0s;
     pointer-events: none;
     opacity: 0;
-    
+
 }
 .sidebar-menu ul li:hover .tool {
     transition: all 0.5s ease;
@@ -185,7 +188,7 @@
     line-height: 35px;
     transition: 0s;
     pointer-events: none;
-    opacity: 0; 
+    opacity: 0;
     }
 .sidebar-menu-out li:hover .tool{
     transition: all 0.5s ease;
@@ -227,7 +230,7 @@ header {
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
     position: fixed;
     left: 70px;
-    width: 95%;
+    width: 96%;
     top: 0;
     z-index: 100;
     transition: left 300ms;

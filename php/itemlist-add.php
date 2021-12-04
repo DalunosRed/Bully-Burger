@@ -7,7 +7,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
   $qty =$_POST['qty'];
   $expdate =$_POST['expdate'];
   $categ =$_POST['category_id'];
-
+  session_start();
   if (isset($prod)) {
 
     $sql = "SELECT id FROM category WHERE categ=?";
@@ -36,8 +36,12 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     }
     # code...
   }else{
-  header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
-    
+    if (isset($_SESSION['inventoryid'])) {
+      header("Location: /Bully-Burger/inventory-item"); /* Redirect browser */
+
+    }else{
+      header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
+    }
   }
 
 

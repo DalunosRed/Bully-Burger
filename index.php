@@ -11,6 +11,11 @@ if (isset($_SESSION['adminid'])) {
   header("Location: /Bully-Burger/admin-panel");
 }
 
+//checks if admin is  logged in
+if (isset($_SESSION['inventoryid'])) {
+  header("Location: /Bully-Burger/inventory-category");
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -63,8 +68,13 @@ if (isset($_SESSION['adminid'])) {
                 <input type="submit" class="btn"></input>
             </form>
           </div>
-          <div class="button_cont"><a class="example_f" href="#modal" >
-            <span>Admin</a></div>
+
+          <div class="button_cont">
+            <a class="example_a" href="#modal" >
+            <span>Admin</a>
+            <a class="example_f " href="#modal1" >
+            <span>Inventory</a>
+          </div>
 
         </div>
       </div> <!--end float-->
@@ -72,6 +82,7 @@ if (isset($_SESSION['adminid'])) {
     </div> <!--end container-->
   </div> <!-- end tran -->
 
+<!-- ADMIN -->
   <!-- MODAL  should be treated as a separate section-->
   <div id="modal" class="modal">
       <div class="modal__content">
@@ -87,7 +98,30 @@ if (isset($_SESSION['adminid'])) {
                 <input id="pwdA" type="password" required />
                 <label>Password</label>
               </div>
-              <h4 id="modal-error"></h4>
+              <h4 class="modal-error"></h4>
+                <input type="submit" class="btn"></input>
+            </form>
+          </div>
+          <a href="#" class="modal__close">&times;</a>
+      </div>
+  </div>
+  <!-- INVENTORY -->
+  <!-- MODAL  should be treated as a separate section-->
+  <div id="modal1" class="modal">
+      <div class="modal__content">
+          <h1>Inventory Login</h1>
+          <br>
+          <div class="form">
+            <form id="inventoryAjax">
+              <div class="input-container">
+                <input id="usnIn" type="text"  required/>
+                <label>Username</label>
+              </div>
+              <div class="input-container">
+                <input id="pwdIn" type="password" required />
+                <label>Password</label>
+              </div>
+              <h4 class="modal-error"></h4>
                 <input type="submit" class="btn"></input>
             </form>
           </div>
@@ -96,5 +130,5 @@ if (isset($_SESSION['adminid'])) {
   </div>
 
 
-</body>
-</html>
+  </body>
+  </html>

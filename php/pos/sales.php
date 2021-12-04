@@ -18,7 +18,7 @@ $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
       exit();
 
   }else{
-  header("Location: /Bully-Burger/manage-item"); /* Redirect browser */
+  header("Location: /Bully-Burger/pos"); /* Redirect browser */
 
   }
 

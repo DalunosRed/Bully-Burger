@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('php/includes/config.php');
-if (!isset($_SESSION['adminid'])) {
+if (!isset($_SESSION['inventoryid'])) {
   header("Location: /Bully-Burger");
 }
 
@@ -26,7 +26,7 @@ if (!isset($_SESSION['adminid'])) {
         <main>
 
 <table class="table">
-			
+
 		<thead>
 										<tr>
 										<th>#</th>
@@ -83,7 +83,7 @@ foreach($results as $result)
 											<td><?php echo htmlentities($result->ExpDate);?></td>
 											<td><?php echo htmlentities($result->category_name);?></td>
                                             <td>
-      <button class="btn btn-primary">
+      <button class="btn btn-secondary">
 				<a href = "inventory-item-edit?itemid=<?php echo htmlentities($result->Product_id); ?>" class="text-light">
 					EDIT</a></button>
                                             </td>
@@ -92,9 +92,9 @@ foreach($results as $result)
 										<?php $cnt=$cnt+1; }} ?>
 
 									</tbody>
-								</table>
-	<button class="btn btn-primary"><a href = "inventory-item-add" class="text-light">Add Item</a></button>
-         
+								</table><br>
+	<button class="btn btn-secondary"><a href = "inventory-item-add" class="text-light">Add Item</a></button>
+
         </main>
     </div>
     <?php  include_once 'php/includes/admin-modal.include.php' ?>

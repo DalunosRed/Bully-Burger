@@ -13,7 +13,6 @@ $repwd = $_POST["repwd"];
 $employee_id = $_SESSION['employee_id'];
 if (isset($fname)) {
 
-
   if (empty($fname) || empty($lname) || empty($usn) || empty($pwd) || empty($repwd) || empty($email)){
       $error = ['emptyfields' => 'Please fill in all the fields'];
       echo json_encode($error);
@@ -39,23 +38,61 @@ if (isset($fname)) {
             echo json_encode($error);
             exit();
         }else{
-              $sql = "UPDATE users
-              SET
-                first_name=?,
-                last_name =?,
-                email = ?,
-                username =?,
-                password=?
-              WHERE
-                employee_id = ?";
-              $stmt = $dbh->prepare($sql);
+          // the main product
+          $sql = "SELECT username FROM users WHERE employee_id=?";
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute([$employee_id]);
+          $row = $stmt->fetch();
 
-              // hash password
-              $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
-              $stmt->execute([$fname,$lname,$email,$usn,$hashedPassword, $employee_id]);
-              $error = ['success' => 'success'];
-              echo json_encode($error);
-              exit();
+          // test all product names
+          $sql = "SELECT username FROM users WHERE username=?";
+          $stmt = $dbh->prepare($sql);
+          $stmt->execute([$usn]);
+          $rowCount= $stmt->rowCount();
+
+          if (strtolower($usn) == strtolower($row['username'])) {
+            $sql = "UPDATE users
+            SET
+              first_name=?,
+              last_name =?,
+              email = ?,
+              username =?,
+              password=?
+            WHERE
+              employee_id = ?";
+            $stmt = $dbh->prepare($sql);
+
+            // hash password
+            $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
+            $stmt->execute([$fname,$lname,$email,$usn,$hashedPassword, $employee_id]);
+            $error = ['success' => 'success'];
+            echo json_encode($error);
+            exit();
+          }else{
+             if ($rowCount > 0) {
+               $error = ['usernametaken' => 'This username is already taken'];
+               echo json_encode($error);
+               exit();
+             } else{
+               $sql = "UPDATE users
+               SET
+                 first_name=?,
+                 last_name =?,
+                 email = ?,
+                 username =?,
+                 password=?
+               WHERE
+                 employee_id = ?";
+               $stmt = $dbh->prepare($sql);
+
+               // hash password
+               $hashedPassword = password_hash($pwd, PASSWORD_DEFAULT);
+               $stmt->execute([$fname,$lname,$email,$usn,$hashedPassword, $employee_id]);
+               $error = ['success' => 'success'];
+               echo json_encode($error);
+               exit();
+             }
+          }
 
     }
 

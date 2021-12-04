@@ -4,7 +4,7 @@
 
             <div class="user-wrapper">
                 <div>
-                    <h4>Admin</h4>
+                    <h4>Inventory</h4>
                     <small><a href="#modal">Change Password</a></small>
                 </div>
             </div>

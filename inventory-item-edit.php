@@ -2,7 +2,7 @@
 require_once 'php/includes/config.php';
 
 session_start();
-if (!isset($_SESSION['adminid'])) {
+if (!isset($_SESSION['inventoryid'])) {
   header("Location: /Bully-Burger");
 }else if(!isset($_GET['itemid'])){
   header("Location: /Bully-Burger/manage-item");
