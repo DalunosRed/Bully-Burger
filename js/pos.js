@@ -340,15 +340,17 @@ let prodname, price, qty=0;
      })
      .done(function(data) {
        $.map(data, function(val, index) {
-
+         url = 'images/food-images/'+ val.image;
+         console.log(url);
          if (val.Qty <= 0) {
            $('.scrollable-cards').append
-             ('<button type="button" class="btn btn-light btn-cards" disabled><p>'+ val.Qty+'</p>'+val.ProductName+ '<p>Out of Stock</p>'+'</button>');
+             ('<button type="button" class="btn btn-light btn-cards" disabled><p>'+ val.Qty+'</p><h4>'+val.ProductName+ '</h4><h6>Out of Stock</h6>'+'</button>');
          } else{
            $('.scrollable-cards').append
-             ('<button type="button" class="btn btn-light btn-cards"><p>'+val.Qty+'</p>'+
+             ('<button type="button" style="background: #f8f9fa center / contain no-repeat url('+url+');" class="btn btn-light btn-cards"><p>'+val.Qty+'</p>'+
              '<h4>'+val.ProductName+'</h4></button>');
          }
+         // $('.scrollable-cards').find('.btn-cards').css('background' , 'center / contain no-repeat url("images/food-images/'+ val.image + '")');
        });
      })
      .fail(function(xhr) {

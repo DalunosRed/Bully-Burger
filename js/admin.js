@@ -1,4 +1,5 @@
 $(document).ready(function() {
+let uploadURL =''
 
 // changing admin pass from modal
 $('.form').on('submit', '#adminChangepass', function(e) {
@@ -117,16 +118,17 @@ $('.form').on('submit', '#updateAJAX', function(e) {
 
 // ==============item update==============
 $('.form').on('submit', '#itemUpdate', function(e) {
+  e.preventDefault();
+  let img= $('#file').val()
+
+
   let date = new Date($('#expdateI').val());
   let d = date.getDate();
   let m =  date.getMonth();
   m += 1;  // JavaScript months are 0-11
   let y = date.getFullYear();
-  console.log(d)
   let formattedDate = y + "-" + m + "-" + d;
 
-
-  e.preventDefault();
   $.ajax({
     url: 'php/itemlist-update.php',
     type: 'POST',
@@ -146,10 +148,15 @@ $('.form').on('submit', '#itemUpdate', function(e) {
             $('#error').text(val);
             break;
           case 'success':
-            window.location.replace('manage-item');
-            //prints error if there is
-            console.log(val);
-            break;
+          if (img != null && img != '') {
+          uploadURL = "php/itemlist-upload-update.php"
+          upload(e);
+          window.location.replace('manage-item');
+          break;
+        }else{
+          window.location.replace('manage-item');
+          break;
+        }
         }
   });
 })
@@ -160,47 +167,95 @@ $('.form').on('submit', '#itemUpdate', function(e) {
 
 
 // ==============item Add==============
-$('.form').on('submit', '#itemAdd', function(e) {
-  let date = new Date($('#expdateA').val());
-  let d = date.getDate();
-  let m =  date.getMonth();
-  m += 1;  // JavaScript months are 0-11
-  let y = date.getFullYear();
-  let formattedDate = y + "-" + m + "-" + d;
+  $('.form').on('submit', '#itemAdd', function(e) {
+          e.preventDefault();
+    let img= $('#file').val()
 
+    if (img != null && img != '') {
 
-  e.preventDefault();
-  $.ajax({
-    url: 'php/itemlist-add.php',
-    type: 'POST',
-    dataType: 'JSON',
-    data: {
-      prod: $("#prdnameA").val(),
-      price: $("#priceA").val(),
-      qty: $("#qtyA").val(),
-      expdate: formattedDate,
-      category_id: $('#categA').val()
+      let date = new Date($('#expdateA').val());
+      let d = date.getDate();
+      let m =  date.getMonth();
+      m += 1;  // JavaScript months are 0-11
+      let y = date.getFullYear();
+      let formattedDate = y + "-" + m + "-" + d;
 
-    }
-  })
-  .done(function(data) {
-    $.map(data, function(val, index) {
-        switch (index) {
-          case 'prodnametaken':
-            $('#error').text(val);
-            break;
-          case 'success':
-            window.location.replace('manage-item');
-            //prints error if there is
-            console.log(val);
-            break;
+      $.ajax({
+        url: 'php/itemlist-add.php',
+        type: 'POST',
+        dataType: 'JSON',
+        data: {
+          prod: $("#prdnameA").val(),
+          price: $("#priceA").val(),
+          qty: $("#qtyA").val(),
+          expdate: formattedDate,
+          category_id: $('#categA').val()
+
         }
-  });
-})
+      })
+      .done(function(data) {
+        $.map(data, function(val, index) {
+            switch (index) {
+              case 'prodnametaken':
+                $('#error').text(val);
+                break;
+              case 'success':
+              uploadURL = "php/itemlist-upload.php"
+                upload(e);
+                window.location.replace('manage-item');
+                //prints error if there is
+                break;
+            }
+      });
+    })
+    .fail(function(xhr, status, error) {
+          console.log("error "  + error+xhr.responseText + xhr.status);
+        });
 
+
+    }//end if
+      else{
+        $('#error').text('Please Select an Image');
+      }
 });
 
+// ==========================================
+function upload(e) {
+  e.preventDefault();
 
+  var name = document.getElementById("file").files[0].name;
+  var form_data = new FormData();
+  var ext = name.split('.').pop().toLowerCase();
+  if(jQuery.inArray(ext, ['gif','png','jpg','jpeg']) == -1)
+  {
+   alert("Invalid Image File");
+  }
+  var oFReader = new FileReader();
+  oFReader.readAsDataURL(document.getElementById("file").files[0]);
+  var f = document.getElementById("file").files[0];
+  var fsize = f.size||f.fileSize;
+  if(fsize > 2000000)
+  {
+   alert("Image File Size is very big");
+  }
+  else
+  {
+   form_data.append("file", document.getElementById('file').files[0]);
+   $.ajax({
+    url:uploadURL,
+    method:"POST",
+    data: form_data,
+    contentType: false,
+    cache: false,
+    processData: false,
+    success:function(data)
+    {
+     console.log(data);
+    }
+   });
+  }
+}
+// ==========================================
 
 // =====================categorty update ============/
 $('.form').on('submit', '#categoryUpdate', function(e) {
@@ -229,9 +284,7 @@ $('.form').on('submit', '#categoryUpdate', function(e) {
         }
   });
   })
-  .fail(function(xhr, status, error) {
-        console.log("error "  + error+xhr.responseText + xhr.status);
-      });
+
 });
 
 

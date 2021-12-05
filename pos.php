@@ -64,7 +64,7 @@ if (!isset($_SESSION['id'])) {
         <div class="content">
 
           <div class="scrollable-cards">
-      <!-- JS -->
+    <!-- JS -->
           </div>
         </div>
 

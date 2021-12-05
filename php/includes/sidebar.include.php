@@ -22,10 +22,7 @@
                     <a href="reg-users"><span class="bx bx-user-pin"></span>
                     <span>REGISTERED EMPLOYEE</span></a>
                 </li>
-                <li>
-                    <a href="inventory-category"><span class="bx bx-list-ol"></span>
-                    <span>INVENTORY</span></a>
-                </li>
+    
 
             </ul>
             <div class="profile_content">

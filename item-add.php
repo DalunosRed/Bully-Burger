@@ -36,12 +36,17 @@ if (!isset($_SESSION['adminid'])) {
         <!-- ====== -->
 
         <div class="form">
-          <form id="itemAdd">
+          <form id="itemAdd" >
+              <label>Product Image</label>
+              <div class="form-group">
+                <img id="image" src="images/200.png" width="100px" class="img-thumbnail" alt="...">
+              <input type="file"oninput="image.src=window.URL.createObjectURL(this.files[0])" name="file" id="file" >
+            </div>
             <div class="formFlex">
               <div class="form-group">
               <label>Product Name</label>
               <input type="text" id="prdnameA"  class="form-control" placeholder="Product Name" name="first_name" required >
-              </div>
+            </div>
               <div class="form-group">
               <label>Price</label>
               <input type="number" id="priceA"  class="form-control" placeholder="Price" required >

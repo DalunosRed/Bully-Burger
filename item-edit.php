@@ -46,7 +46,8 @@ $sql  = 'SELECT
 					i.ProductName,
 					i.Price,
 					i.Qty,
-					i.ExpDate
+					i.ExpDate,
+          i.image
 					FROM itemlist i
 					LEFT JOIN
 					 category p ON i.category_id = p.id
@@ -57,6 +58,11 @@ $row=$query->fetch(PDO::FETCH_ASSOC);
  ?>
               <div class="form">
                 <form id="itemUpdate">
+                  <label>Product Image</label>
+                  <div class="form-group">
+                    <img id="image" src="images/food-images/<?php echo htmlspecialchars($row['image']); ?>" width="100px" class="img-thumbnail" alt="...">
+                    <input type="file" oninput="image.src=window.URL.createObjectURL(this.files[0])" name="file" id="file" >
+                  </div>
                   <div class="formFlex">
                     <div class="form-group">
                     <label>Product Name</label>
