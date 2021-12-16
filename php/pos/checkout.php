@@ -21,17 +21,19 @@ if (isset($arr)) {
     if ($qty < 0) {
         $error = ['shortstock' => 'Cannot Proceed, Short of stock'];
         echo json_encode($error);
-        exit();
+        die();
       }else{
         $query = "UPDATE itemlist SET Qty = ? WHERE Product_id = ?";
         $stmt = $dbh->prepare($query);
         $stmt->execute([(int)$qty, $row['Product_id']]);
-
+        $error = ['success' => 'success'];
+        echo json_encode($error);
+        exit();
       }
+
       // echo '<script>console.log(' .$qty .')</script>';
       }
-      $error = ['success' => 'success'];
-      echo json_encode($error);
+
   }
 else{
   header("Location: /Bully-Burger/"); /* Redirect browser */

@@ -119,7 +119,6 @@ let prodname, price, qty=0;
         $('#error').text('Please Choose an Order First')
       }else {
         checkout() // checkout
-        sales() //sales
       }
     });
 
@@ -244,11 +243,13 @@ let prodname, price, qty=0;
       })
       .done(function(data) {
         $.map(data, function(val, index) {
+          console.log(val)
             switch (index) {
               case 'shortstock':
                 $('#error').text(val);
                 break;
               case 'success':
+                sales() //insert into sales
                 setTimeout(function() {
                   $('.modal').css({
                     "visibility" : "visible",
